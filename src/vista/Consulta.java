@@ -177,7 +177,7 @@ public class Consulta extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Movieda fd = new Movieda();
-                movie f = new movie( Integer.parseInt(stock.getText()),Nombre.getText(),Nombre.getText(),Nombre.getText(),Nombre.getText(),true,Integer.parseInt(stock.getText()));
+                movie f = new movie( Integer.parseInt(stock.getText()),Nombre.getText(),Nombre.getText(),Nombre.getText(),Nombre.getText(),Integer.parseInt(stock.getText()),true);
                 
                 if(no.isSelected()){
                     f.setEn_proyeccion(false);
@@ -196,7 +196,7 @@ public class Consulta extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Movieda fd = new Movieda();
-                movie f = new movie(Integer.parseInt(stock.getText()),Nombre.getText(),Nombre.getText(),Nombre.getText(),Nombre.getText(),true,Integer.parseInt(stock.getText()));
+                movie f = new movie(Integer.parseInt(stock.getText()),Nombre.getText(),Nombre.getText(),Nombre.getText(),Nombre.getText(),Integer.parseInt(stock.getText()),true);
                 
                 if(no.isSelected()){
                    f.setEn_proyeccion(false);
