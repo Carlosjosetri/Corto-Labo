@@ -8,32 +8,36 @@ public class movie {
    private int id;
     private String nombre;
     private String director;
+        private String pais;
     private String clasificacion;
-    private String pais;
+
+      private int anio;
     private boolean en_proyeccion;
-    private int anio;
+  
 
     public movie() {
     }
 
-    public movie(int id, String nombre, String director, String clasificacion, String pais, boolean en_proyeccion, int anio) {
+    public movie(int id, String nombre, String director, String pais, String clasificacion, int anio, boolean en_proyeccion) {
         this.id = id;
         this.nombre = nombre;
         this.director = director;
-        this.clasificacion = clasificacion;
         this.pais = pais;
-        this.en_proyeccion = en_proyeccion;
+        this.clasificacion = clasificacion;
         this.anio = anio;
+        this.en_proyeccion = en_proyeccion;
     }
 
-    public movie(String nombre, String director, String clasificacion, String pais, boolean en_proyeccion, int anio) {
+    public movie(String nombre, String director, String pais, String clasificacion, int anio, boolean en_proyeccion) {
         this.nombre = nombre;
         this.director = director;
-        this.clasificacion = clasificacion;
         this.pais = pais;
-        this.en_proyeccion = en_proyeccion;
+        this.clasificacion = clasificacion;
         this.anio = anio;
+        this.en_proyeccion = en_proyeccion;
     }
+
+
 
     public int getId() {
         return id;

@@ -26,7 +26,7 @@ import modelo.movie;
 public class Consulta extends JFrame {
 
     
-    public JLabel lblnombre, lblDirector, lblStock, lblExistencia;
+    public JLabel lblnombre, lblDirector, lblanio, lblenproyeccion;
     
     public JTextField Nombre, descripcion, stock;
     public JComboBox director;
@@ -54,8 +54,8 @@ public class Consulta extends JFrame {
         Container container = getContentPane();
         container.add(lblnombre);
         container.add(lblDirector);
-        container.add(lblStock);
-        container.add(lblExistencia);
+        container.add(lblanio);
+        container.add(lblenproyeccion);
         container.add(Nombre);
         container.add(director);
         container.add(stock);
@@ -67,19 +67,19 @@ public class Consulta extends JFrame {
         container.add(eliminar);
         container.add(limpiar);
         container.add(table);
-        setSize(600, 600);
+        setSize(800, 600);
         eventos();
     }
 
     private void agregarLabels() {
         lblnombre = new JLabel("Nombre");
         lblDirector = new JLabel("director");
-        lblStock = new JLabel("Stock");
-        lblExistencia = new JLabel("Stock en tienda");
+        lblanio = new JLabel("anio");
+        lblenproyeccion = new JLabel("en proyeccion");
         lblnombre.setBounds(10, 10, ANCHOC, ALTOC);
         lblDirector.setBounds(10, 60, ANCHOC, ALTOC);
-        lblStock.setBounds(10, 100, ANCHOC, ALTOC);
-        lblExistencia.setBounds(10, 140, ANCHOC, ALTOC);
+        lblanio.setBounds(10, 100, ANCHOC, ALTOC);
+        lblenproyeccion.setBounds(10, 140, ANCHOC, ALTOC);
     }
 
     private void formulario() {
@@ -138,8 +138,12 @@ public class Consulta extends JFrame {
                     case 1:
                         return String.class;
                     case 2:
-                        return String.class;
+                        return int.class;
                     case 3:
+                        return String.class;
+                    case 4:
+                        return String.class;
+                    case 5:
                         return Boolean.class;
                 }
                 return null;
@@ -148,17 +152,19 @@ public class Consulta extends JFrame {
         //agregamos las columnas que se mostraran con su respectivo nombre
         tm.addColumn("Nombre");
         tm.addColumn("director");
-        tm.addColumn("Stock");
-        tm.addColumn("Stock en sucursal");
+        tm.addColumn("anio");
+        tm.addColumn("Clasificaion");
+        tm.addColumn("pais");
+        tm.addColumn("en_proyecion");
         
         //realizamos la consulta a nuestra base de datos por medio del metodo 
         Movieda fd = new Movieda();
-        ArrayList<movie> filtros = fd.readAll();
+        ArrayList<movie> movies = fd.readAll();
         
         //agregamos el resultado a nuestro JTable
         //se agregan de tipo Object
-        for (movie fi : filtros){
-            tm.addRow(new Object[]{fi.getNombre(), fi.getDirector(), fi.getAnio(), fi.getEn_proyeccion()});
+        for (movie fi : movies){
+            tm.addRow(new Object[]{fi.getNombre(), fi.getDirector(), fi.getAnio(),fi.getClasificacion(),fi.getPais(), fi.getEn_proyeccion()});
         }
         
         //le agregamos el modelo de nuestra tabla
@@ -178,7 +184,7 @@ public class Consulta extends JFrame {
                 }
                 
                 if(fd.create(f)){
-                    JOptionPane.showMessageDialog(null, "Filtro registrado con exito");
+                    JOptionPane.showMessageDialog(null, "movie registrado con exito");
                     limpiarCampos();
                     llenarTabla();
                 } else {
@@ -197,11 +203,11 @@ public class Consulta extends JFrame {
                 }
                 
                 if(fd.update(f)){
-                    JOptionPane.showMessageDialog(null, "Filtro modificado con exito");
+                    JOptionPane.showMessageDialog(null, "movie modificado con exito");
                     limpiarCampos();
                     llenarTabla();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Ocurrio un problema al momento de modificar el filtro");
+                    JOptionPane.showMessageDialog(null, "Ocurrio un problema al momento de modificar el movie");
                 }
             }
         });
@@ -214,7 +220,7 @@ public class Consulta extends JFrame {
                     limpiarCampos();
                     llenarTabla();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Ocurrio un problema a momento de eliminar el filtro");
+                    JOptionPane.showMessageDialog(null, "Ocurrio un problema a momento de eliminar el movie");
                 }
             }
         });
@@ -224,7 +230,7 @@ public class Consulta extends JFrame {
                 Movieda fd = new Movieda();
                 movie f = fd.read(Nombre.getText());
                 if(f == null){
-                    JOptionPane.showMessageDialog(null, "El filtro buscado no se ha encontrado");
+                    JOptionPane.showMessageDialog(null, "El movie buscado no se ha encontrado");
                 } else {
                     Nombre.setText(f.getNombre());
                     director.setSelectedItem(f.getDirector());
